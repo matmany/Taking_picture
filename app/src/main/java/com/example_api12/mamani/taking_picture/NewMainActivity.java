@@ -22,16 +22,24 @@ static final int PICK_CONTACT_REQUEST = 1;
 private TextView text;
     File Filepath;
     Button cancelButton;
+    Button confirmButtom;
    private ImageView image;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newmain);
+
         text = (TextView) findViewById(R.id.Textview);
+
         image = (ImageView) findViewById(R.id.imageView);
+
         cancelButton = (Button) findViewById(R.id.button2);
         cancelButton.setVisibility(View.GONE);
+
+        confirmButtom = (Button) findViewById(R.id.button3);
+        confirmButtom.setVisibility(View.GONE);
+
     }
 
     public void taking_foto(View v)
@@ -48,6 +56,13 @@ private TextView text;
         image.setImageBitmap(null);
         Filepath.delete();
         cancelButton.setVisibility(View.GONE);
+        confirmButtom.setVisibility(View.GONE);
+    }
+
+    public void confirButttom(View v)
+    {
+        cancelButton.setVisibility(View.GONE);
+        confirmButtom.setVisibility(View.GONE);
     }
 
     @Override
@@ -67,6 +82,7 @@ private TextView text;
 
                 image.setImageBitmap(mybitma);
                 cancelButton.setVisibility(View.VISIBLE);
+                confirmButtom.setVisibility(View.VISIBLE);
             }
             if(resultCode == Activity.RESULT_CANCELED)
             {
