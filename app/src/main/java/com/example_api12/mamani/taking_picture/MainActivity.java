@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
         mCamera = getCameraInstance();
 
+        Camera.Parameters parameters = mCamera.getParameters();
+        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        mCamera.setParameters(parameters);
+
         mPreview = new CameraPreview(this,mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(View view) {
+
+
 
                         mCamera.takePicture(null,null,mPicture);
                         captureButton.setClickable(false);
@@ -138,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
     private static File getOutputMediaFile(int type)
     {
         //File mediaStoregeDir = new File(Environment.getExternalStoragePublicDirectory(
-          //      Environment.DIRECTORY_PICTURES),"MyCameraApp");
+          //    Environment.DIRECTORY_PICTURES),"MyCameraApp");
         File mediaStoregeDir =  Environment.getExternalStoragePublicDirectory("GSA/imagens");
 
         if(!mediaStoregeDir.exists()){

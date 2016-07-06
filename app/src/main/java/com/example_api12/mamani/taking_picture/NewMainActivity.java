@@ -30,7 +30,7 @@ private TextView text;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newmain);
 
-        text = (TextView) findViewById(R.id.Textview);
+
 
         image = (ImageView) findViewById(R.id.imageView);
 
@@ -46,6 +46,7 @@ private TextView text;
     {
      // startActivity(new Intent(this,MainActivity.class));
         //startActivityForResult
+
         Intent pickContactIntent = new Intent(this,MainActivity.class);
         startActivityForResult(pickContactIntent,PICK_CONTACT_REQUEST);
 
@@ -74,13 +75,16 @@ private TextView text;
             if(resultCode == Activity.RESULT_OK)
             {
                 String result=data.getStringExtra("result");
-                text.setText(result);
+
 
                 File imfFile = new File(result);
                 Filepath = imfFile;
-                Bitmap mybitma = BitmapFactory.decodeFile(imfFile.getAbsolutePath());
 
-                image.setImageBitmap(mybitma);
+                //Bitmap mybitma = BitmapFactory.decodeFile(imfFile.getAbsolutePath());
+               // image.setImageBitmap(mybitma);
+
+                setPiv(result);
+
                 cancelButton.setVisibility(View.VISIBLE);
                 confirmButtom.setVisibility(View.VISIBLE);
             }
@@ -89,5 +93,26 @@ private TextView text;
 
             }
         }
+    }
+
+    private void setPiv(String mCurrentPhotoPath)
+    {
+        int targetW = image.getWidth();
+        int targetH = image.getHeight();
+
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath,bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        int scaleFactor = Math.min(photoW/targetW,photoH/targetH);
+
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        image.setImageBitmap(bitmap);
     }
 }
