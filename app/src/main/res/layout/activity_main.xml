@@ -15,6 +15,8 @@
        android:layout_height="fill_parent"
        android:layout_weight="1"
        >
+
+
    </FrameLayout>
     
     <Button
@@ -26,5 +28,35 @@
         android:layout_centerHorizontal="true"
         android:onClick="taking_photo"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Retake"
+        android:id="@+id/button_cancel2"
+        android:layout_centerVertical="true"
+        android:onClick="canceling_pickture"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="Confirm"
+        android:id="@+id/button_confirm2"
+        android:onClick="confirming_pickture"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="return"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/buttom_Return"
+        android:onClick="return_first"
+
+        ></Button>
 
 </RelativeLayout>

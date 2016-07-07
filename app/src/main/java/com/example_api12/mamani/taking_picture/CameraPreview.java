@@ -27,16 +27,16 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
        mHolder.addCallback(this);
        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-       setFocusable(true);
-       setFocusableInTouchMode(true);
+     //  setFocusable(true);
+     //  setFocusableInTouchMode(true);
 
    }
 
     public void surfaceCreated(SurfaceHolder holder)
     {
-        Camera.Parameters parameters = mCamera.getParameters();
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-        mCamera.setParameters(parameters);
+      //  Camera.Parameters parameters = mCamera.getParameters();
+      //  parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+     //   mCamera.setParameters(parameters);
 
         try{
             mCamera.setPreviewDisplay(holder);
@@ -67,9 +67,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         //reformating changes here
 
-       Camera.Parameters parameters = mCamera.getParameters();
-       parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-       mCamera.setParameters(parameters);
+     //  Camera.Parameters parameters = mCamera.getParameters();
+     //  parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+     //  mCamera.setParameters(parameters);
 
         try {
             mCamera.setPreviewDisplay(mHolder);
@@ -83,7 +83,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
-    public boolean onTouchEvent(MotionEvent event){
+   /* public boolean onTouchEvent(MotionEvent event){
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             Log.d("down", "focusing now");
 
@@ -91,7 +91,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         }
 
         return true;
-    }
+    }*/
 
 
 }

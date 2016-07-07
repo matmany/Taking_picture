@@ -20,7 +20,7 @@
 
     <ImageView
         app:layout_widthPercent="80%"
-        app:layout_heightPercent="80%"
+        app:layout_heightPercent="95%"
         android:id="@+id/imageView"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -30,24 +30,6 @@
 
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:id="@+id/button2"
-        android:onClick="canceling_manouver"
-        android:layout_alignTop="@+id/button3"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CONFIRM"
-        android:onClick="confirButttom"
-        android:id="@+id/button3"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView" />
 
 </android.support.percent.PercentRelativeLayout>

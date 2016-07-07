@@ -20,9 +20,7 @@ import java.io.File;
 public class NewMainActivity extends AppCompatActivity {
 static final int PICK_CONTACT_REQUEST = 1;
 private TextView text;
-    File Filepath;
-    Button cancelButton;
-    Button confirmButtom;
+    File Filepath;;
    private ImageView image;
 
     @Override
@@ -30,15 +28,7 @@ private TextView text;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newmain);
 
-
-
         image = (ImageView) findViewById(R.id.imageView);
-
-        cancelButton = (Button) findViewById(R.id.button2);
-        cancelButton.setVisibility(View.GONE);
-
-        confirmButtom = (Button) findViewById(R.id.button3);
-        confirmButtom.setVisibility(View.GONE);
 
     }
 
@@ -50,20 +40,6 @@ private TextView text;
         Intent pickContactIntent = new Intent(this,MainActivity.class);
         startActivityForResult(pickContactIntent,PICK_CONTACT_REQUEST);
 
-    }
-
-    public void canceling_manouver(View v)
-    {
-        image.setImageBitmap(null);
-        Filepath.delete();
-        cancelButton.setVisibility(View.GONE);
-        confirmButtom.setVisibility(View.GONE);
-    }
-
-    public void confirButttom(View v)
-    {
-        cancelButton.setVisibility(View.GONE);
-        confirmButtom.setVisibility(View.GONE);
     }
 
     @Override
@@ -85,8 +61,6 @@ private TextView text;
 
                 setPiv(result);
 
-                cancelButton.setVisibility(View.VISIBLE);
-                confirmButtom.setVisibility(View.VISIBLE);
             }
             if(resultCode == Activity.RESULT_CANCELED)
             {

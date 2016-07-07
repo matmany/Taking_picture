@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -28,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGE =1;
     public static final int MEDIA_TYPE_VIDEO = 2;
     public static final int mPreviewState = 0;
+    File pickturetake;
+    Button captureButton;
+    Button canceling_but;
+    Button confirming_but;
+    Button return_but;
+
+    ImageView image=null;
+    FrameLayout preview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +52,20 @@ public class MainActivity extends AppCompatActivity {
         //mCamera.setParameters(parameters);
 
         mPreview = new CameraPreview(this,mCamera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+         preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
 
-        final Button captureButton = (Button) findViewById(R.id.photo_button);
+        canceling_but = (Button) findViewById(R.id.button_cancel2);
+        confirming_but = (Button) findViewById(R.id.button_confirm2);
+        captureButton = (Button) findViewById(R.id.photo_button);
+        return_but = (Button) findViewById(R.id.buttom_Return);
+
+        canceling_but.setVisibility(View.GONE);
+        confirming_but.setVisibility(View.GONE);
+
+
+
         captureButton.setOnClickListener(
                 new View.OnClickListener() {
 
@@ -58,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
                         mCamera.takePicture(null,null,mPicture);
                         captureButton.setClickable(false);
 
+                        captureButton.setVisibility(View.GONE);
+                        return_but.setVisibility(View.GONE);
+
+                        canceling_but.setVisibility(View.VISIBLE);
+                        confirming_but.setVisibility(View.VISIBLE);
                     }
                 }
         );
@@ -84,10 +108,14 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Intent returnIntent = new Intent();
-            returnIntent.putExtra("result",pictureFile.toString());
-            setResult(Activity.RESULT_OK,returnIntent);
-            finish();
+            pickturetake = pictureFile;
+
+           // preview.addView(image);
+            //killing_Activity(pictureFile);
+            //Intent returnIntent = new Intent();
+            //returnIntent.putExtra("result",pictureFile.toString());
+            //setResult(Activity.RESULT_OK,returnIntent);
+            //finish();
 
         }
 
@@ -166,6 +194,31 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
         return mediaFile;
+    }
+
+    private void killing_Activity(File pictureFile)
+    {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result",pictureFile.toString());
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
+    }
+
+    public void confirming_pickture(View v)
+    {
+        killing_Activity(pickturetake);
+    }
+
+    public void canceling_pickture(View v)
+    {
+        pickturetake.delete();
+        recreate();
+    }
+
+    public void return_first(View v)
+    {
+        setResult(Activity.RESULT_CANCELED,null);
+        finish();
     }
 
 }
