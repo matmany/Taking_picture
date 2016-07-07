@@ -3,6 +3,7 @@ package com.example_api12.mamani.taking_picture;
 import android.content.Context;
 import android.hardware.Camera;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -17,6 +18,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private Camera mCamera;
 
 
+
    public CameraPreview(Context context,Camera camera)
    {
        super(context);
@@ -25,13 +27,21 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
        mHolder.addCallback(this);
        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
+       setFocusable(true);
+       setFocusableInTouchMode(true);
+
    }
 
     public void surfaceCreated(SurfaceHolder holder)
     {
+        Camera.Parameters parameters = mCamera.getParameters();
+        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+        mCamera.setParameters(parameters);
+
         try{
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
+            mCamera.autoFocus(null);
         } catch (IOException e) {
             e.printStackTrace();
            // Log.d(TAG,"Error setting camera preview"+ e.getMessage());
@@ -57,15 +67,30 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         //reformating changes here
 
+       Camera.Parameters parameters = mCamera.getParameters();
+       parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+       mCamera.setParameters(parameters);
+
         try {
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
+            mCamera.autoFocus(null);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
 
+    }
+
+    public boolean onTouchEvent(MotionEvent event){
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            Log.d("down", "focusing now");
+
+            mCamera.autoFocus(null);
+        }
+
+        return true;
     }
 
 

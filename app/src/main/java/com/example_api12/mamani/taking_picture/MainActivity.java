@@ -32,13 +32,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         mCamera = getCameraInstance();
 
-        Camera.Parameters parameters = mCamera.getParameters();
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-        mCamera.setParameters(parameters);
+       // Camera.Parameters parameters = mCamera.getParameters();
+        //parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        //mCamera.setParameters(parameters);
 
         mPreview = new CameraPreview(this,mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
